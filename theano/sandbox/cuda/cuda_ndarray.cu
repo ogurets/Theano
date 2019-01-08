@@ -140,9 +140,10 @@ void * device_malloc(size_t size, int verbose)
         cnmemStatus_t status = CNMEM_STATUS_SUCCESS;
         status = cnmemMalloc(&rval, size, NULL);
         if(status != CNMEM_STATUS_SUCCESS) {
+            // [Z]: fixed crashing
             PyErr_Format(PyExc_MemoryError,
-                         "Error allocating %llu bytes of device memory (%s).",
-                         (unsigned long long)size, cnmemGetErrorString(status));
+                         "Error allocating %lu bytes of device memory (%s).",
+                         (unsigned long)size, cnmemGetErrorString(status));
             return NULL;
         }
     }

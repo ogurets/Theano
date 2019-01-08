@@ -507,9 +507,10 @@ class GpuArrayType(Type):
         return ['gpuarray']
 
     def c_code_cache_version(self):
-        ver = pygpu.gpuarray.abi_version()
+        ver = pygpu.gpuarray.api_version()
         # we only use the major version since the minor revision are compatible.
-        return (2, ver[0])
+        #return (2, ver[0])
+        return (2, 1)  # [Z] Has to emulate since gpuarray is DEV build
 
 
 class _operators(_tensor_py_operators):

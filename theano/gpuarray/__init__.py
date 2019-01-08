@@ -49,7 +49,7 @@ def init_dev(dev, name=None):
         raise ValueError(
             "Your installed version of pygpu is too old, please upgrade to 0.6.1 or later")
     # This is for the C headers API, we need to match the exact version.
-    if pygpu.gpuarray.api_version()[0] != 1:
+    if pygpu.gpuarray.api_version()[0] != 1 and pygpu.gpuarray.api_version()[0] != -9997:  # [Z] Added pre-release apis
         raise ValueError(
             "Your installed libgpuarray is not in sync, please make sure to have the appropriate version")
     if dev not in init_dev.devmap:
@@ -58,7 +58,7 @@ def init_dev(dev, name=None):
             disable_alloc_cache=config.gpuarray.preallocate < 0,
             single_stream=config.gpuarray.single_stream,
             sched=config.gpuarray.sched)
-        context.dev = dev
+        #context.dev = dev  # [Z]
         init_dev.devmap[dev] = context
         reg_context(name, context)
 

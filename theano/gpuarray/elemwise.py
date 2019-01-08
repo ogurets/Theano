@@ -60,6 +60,7 @@ def max_inputs_to_GpuElemwise(node_or_outputs):
 
     # we take the limit from CUDA for now
     nb_bytes_total = 4096
+    #nb_bytes_total = 256  # [Z] For sm13
 
     # Regardless of the number of arguments, we have:
     # - The total number of elements (int)
